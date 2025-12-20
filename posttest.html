@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Test - NPS Calculator Virtual Lab | PCCOE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #071A3B, #0A2463);
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #FF6B35, #FF8B5C);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .breadcrumb a {
+            color: #0A2463;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #cbd5e1;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 2rem 0 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0A2463;
+            margin-bottom: 1rem;
+        }
+
+        .page-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .user-info-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #FF6B35;
+        }
+
+        .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-info-header i {
+            font-size: 2rem;
+            color: #FF6B35;
+        }
+
+        .user-info-header h3 {
+            font-size: 1.5rem;
+            color: #0A2463;
+            font-weight: 700;
+        }
+
+        .user-input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #0A2463;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #0A2463;
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0A2463, #1E40AF);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10, 36, 99, 0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .user-display {
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #3A86FF;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .user-display.show {
+            display: block;
+        }
+
+        .posttest-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .posttest-header {
+            background: linear-gradient(135deg, #0A2463, #1E40AF);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .posttest-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .posttest-body {
+            padding: 2rem;
+        }
+
+        .question {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .question:last-child {
+            border-bottom: none;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B35, #FF8B5C);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0A2463;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .question-difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .difficulty-hard {
+            background: rgba(220, 38, 38, 0.1);
+            color: #dc2626;
+            border: 1px solid #dc2626;
+        }
+
+        .difficulty-advanced {
+            background: rgba(10, 36, 99, 0.1);
+            color: #0A2463;
+            border: 1px solid #0A2463;
+        }
+
+        .difficulty-medium {
+            background: rgba(255, 158, 0, 0.1);
+            color: #FF9E00;
+            border: 1px solid #FF9E00;
+        }
+
+        .math-formula {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #3A86FF;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            background: rgba(10, 36, 99, 0.05);
+            border-color: #0A2463;
+        }
+
+        .option.correct {
+            background: rgba(56, 176, 0, 0.1);
+            border-color: #38B000;
+        }
+
+        .option.incorrect {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: #dc2626;
+        }
+
+        .option-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option.selected .option-circle {
+            background: #0A2463;
+            border-color: #0A2463;
+        }
+
+        .option.correct .option-circle {
+            background: #38B000;
+            border-color: #38B000;
+        }
+
+        .option.incorrect .option-circle {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+
+        .option-circle::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+        }
+
+        .option.selected .option-circle::after,
+        .option.correct .option-circle::after,
+        .option.incorrect .option-circle::after {
+            opacity: 1;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        .option-code {
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f1f5f9;
+            flex-wrap: wrap;
+        }
+
+        .results-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            display: none;
+        }
+
+        .results-header {
+            margin-bottom: 2rem;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            color: #0A2463;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0A2463;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0A2463;
+            margin: 1rem 0;
+        }
+
+        .score-breakdown {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: #0A2463;
+        }
+
+        footer {
+            background: #071A3B;
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .user-input-container {
+                flex-direction: column;
+            }
+
+            .input-group {
+                min-width: 100%;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .question-text {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .posttest-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <span>NPS Virtual Lab - Post-Test</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-clipboard-check"></i> Post-Test</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="#">Engineering Mathematics</a>
+            <span>→</span>
+            <a href="#">NPS Calculator Virtual Lab</a>
+            <span>→</span>
+            <span>Post-Test</span>
+        </div>
+
+        <div class="page-title">
+            <h1>Post-Experiment Assessment</h1>
+            <p>Test your understanding of advanced NPS concepts and mathematical calculations after completing the simulation experiment.</p>
+        </div>
+
+        <div class="user-info-section">
+            <div class="user-info-header">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Participant Information</h3>
+            </div>
+
+            <div class="user-input-container">
+                <div class="input-group">
+                    <label for="userName"><i class="fas fa-user"></i> Enter Your Full Name</label>
+                    <input type="text" id="userName" placeholder="Enter your name for certificate">
+                </div>
+                <button type="button" class="btn btn-primary" id="saveNameBtn">
+                    <i class="fas fa-save"></i> Save Name
+                </button>
+            </div>
+
+            <div class="user-display" id="userDisplay">
+                <p><i class="fas fa-check-circle" style="color: #38B000;"></i> Welcome, <strong id="displayUserName">User</strong>! Your name will appear on your certificate.</p>
+            </div>
+        </div>
+
+        <div class="posttest-container">
+            <div class="posttest-header">
+                <h2>Advanced NPS Calculator Post-Test</h2>
+                <p>Challenge yourself with these advanced questions</p>
+            </div>
+
+            <div class="posttest-body">
+                <form id="posttestForm">
+                    <div class="question">
+                        <div class="question-number">1</div>
+                        <div class="question-text">
+                            <span>If a 30-year-old invests ₹15,000 monthly in NPS at 9% annual return, what will be the difference in corpus if they increase monthly contributions by 5% annually versus keeping it constant until age 60?</span>
+                            <span class="question-difficulty difficulty-hard">Hard</span>
+                        </div>
+                        <div class="math-formula">
+                            FV = P × [(1 + r)^n - 1] / r × (1 + r) for constant contributions
+                        </div>
+                        <div class="options">
+                            <div class="option" data-value="a">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Approximately 40-45% higher corpus
+                                    <div class="option-code">FV_increase ≈ 1.4 × FV_constant</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="b">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Approximately 60-65% higher corpus
+                                    <div class="option-code">FV_increase ≈ 1.6 × FV_constant</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="c">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Approximately 25-30% higher corpus
+                                </div>
+                            </div>
+                            <div class="option" data-value="d">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Approximately 15-20% higher corpus
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">2</div>
+                        <div class="question-text">
+                            <span>For someone in the 30% tax bracket, what is the effective annualized return enhancement on NPS contributions due to tax benefits?</span>
+                            <span class="question-difficulty difficulty-advanced">Advanced</span>
+                        </div>
+                        <div class="options">
+                            <div class="option" data-value="a">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Tax benefits add approximately 2-3% to effective annual returns
+                                </div>
+                            </div>
+                            <div class="option" data-value="b">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Tax benefits add approximately 1-1.5% to effective annual returns
+                                </div>
+                            </div>
+                            <div class="option" data-value="c">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Tax benefits add approximately 3-4% to effective annual returns
+                                </div>
+                            </div>
+                            <div class="option" data-value="d">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Tax benefits don't affect effective returns
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">3</div>
+                        <div class="question-text">
+                            <span>In NPS Auto Choice (LC75), what is the equity allocation at age 40 if it starts at 75% at age 25 and reduces to 15% at age 55?</span>
+                            <span class="question-difficulty difficulty-medium">Medium</span>
+                        </div>
+                        <div class="math-formula">
+                            Linear reduction: E(age) = 75 - [(75-15)/(55-25)] × (age - 25)
+                        </div>
+                        <div class="options">
+                            <div class="option" data-value="a">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    50%
+                                    <div class="option-code">E(40) = 75 - 2 × (40-25) = 45%</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="b">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    45%
+                                </div>
+                            </div>
+                            <div class="option" data-value="c">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    55%
+                                </div>
+                            </div>
+                            <div class="option" data-value="d">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    60%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">4</div>
+                        <div class="question-text">
+                            <span>If NPS corpus at retirement is ₹2 Crore and 40% is used to purchase an annuity at 6%, what monthly pension will it generate?</span>
+                            <span class="question-difficulty difficulty-hard">Hard</span>
+                        </div>
+                        <div class="options">
+                            <div class="option" data-value="a">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Annuity: ₹40,000/month; SWR: ₹66,667/month
+                                </div>
+                            </div>
+                            <div class="option" data-value="b">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Annuity: ₹66,667/month; SWR: ₹40,000/month
+                                </div>
+                            </div>
+                            <div class="option" data-value="c">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Both provide approximately ₹40,000/month
+                                </div>
+                            </div>
+                            <div class="option" data-value="d">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Annuity: ₹40,000/month; SWR: ₹53,333/month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">5</div>
+                        <div class="question-text">
+                            <span>Considering inflation at 6% and NPS returns at 10%, what is the real rate of return?</span>
+                            <span class="question-difficulty difficulty-advanced">Advanced</span>
+                        </div>
+                        <div class="math-formula">
+                            Real return = [(1+nominal)/(1+inflation)] - 1
+                        </div>
+                        <div class="options">
+                            <div class="option" data-value="a">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    NPS: 3.77% real return; FD: 0.94% real return
+                                </div>
+                            </div>
+                            <div class="option" data-value="b">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    NPS: 4% real return; FD: 1% real return
+                                </div>
+                            </div>
+                            <div class="option" data-value="c">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    Both have same real return
+                                </div>
+                            </div>
+                            <div class="option" data-value="d">
+                                <div class="option-circle"></div>
+                                <div class="option-text">
+                                    NPS: 4.5% real return; FD: 2% real return
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button type="button" class="btn btn-secondary" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset Test
+                        </button>
+                        <button type="button" class="btn btn-primary" id="submitBtn" disabled>
+                            <i class="fas fa-paper-plane"></i> Submit Post-Test
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="results-panel" id="resultsPanel">
+            <div class="results-header">
+                <div class="results-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="results-title">Post-Test Results</h2>
+                <div class="results-score" id="finalScore">0/5</div>
+            </div>
+
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <span>Participant Name:</span>
+                    <span id="certificateName">User</span>
+                </div>
+                <div class="score-item">
+                    <span>Total Questions:</span>
+                    <span>5</span>
+                </div>
+                <div class="score-item">
+                    <span>Correct Answers:</span>
+                    <span id="correctAnswers">0</span>
+                </div>
+                <div class="score-item">
+                    <span>Score Percentage:</span>
+                    <span id="scorePercentage">0%</span>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="btn btn-secondary" id="reviewBtn">
+                    <i class="fas fa-book-open"></i> Review Answers
+                </button>
+                <button type="button" class="btn btn-primary" id="certificateBtn">
+                    <i class="fas fa-award"></i> Generate Certificate
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>PCCOE Virtual Labs</h3>
+                    <p>Applied Sciences & Humanities Department</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NPS Calculator Virtual Lab | Engineering Mathematics Experiment</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const correctAnswers = {
+            '1': 'b',
+            '2': 'c',
+            '3': 'b',
+            '4': 'd',
+            '5': 'a'
+        };
+
+        let userAnswers = {};
+        let userName = '';
+        let userNameSaved = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userNameInput = document.getElementById('userName');
+            const saveNameBtn = document.getElementById('saveNameBtn');
+            const userDisplay = document.getElementById('userDisplay');
+            const displayUserName = document.getElementById('displayUserName');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const savedName = localStorage.getItem('npsUserName');
+            if (savedName) {
+                userName = savedName;
+                userNameInput.value = userName;
+                displayUserName.textContent = userName;
+                userDisplay.classList.add('show');
+                submitBtn.disabled = false;
+                userNameSaved = true;
+            }
+
+            saveNameBtn.addEventListener('click', function() {
+                const name = userNameInput.value.trim();
+
+                if (!name || name.length < 2) {
+                    alert('Please enter a valid name (minimum 2 characters)');
+                    return;
+                }
+
+                userName = name;
+                displayUserName.textContent = userName;
+                userDisplay.classList.add('show');
+                submitBtn.disabled = false;
+                userNameSaved = true;
+
+                localStorage.setItem('npsUserName', userName);
+
+                const originalText = saveNameBtn.innerHTML;
+                saveNameBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                saveNameBtn.style.background = '#38B000';
+
+                setTimeout(() => {
+                    saveNameBtn.innerHTML = originalText;
+                    saveNameBtn.style.background = '';
+                }, 2000);
+            });
+
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionNumber = question.querySelector('.question-number').textContent;
+
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+                    userAnswers[questionNumber] = this.getAttribute('data-value');
+                });
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', resetTest);
+            submitBtn.addEventListener('click', submitTest);
+            document.getElementById('reviewBtn').addEventListener('click', reviewAnswers);
+            document.getElementById('certificateBtn').addEventListener('click', generateCertificate);
+        });
+
+        function resetTest() {
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            userAnswers = {};
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = !userNameSaved;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Post-Test';
+
+            document.getElementById('resultsPanel').style.display = 'none';
+        }
+
+        function submitTest() {
+            if (!userNameSaved) {
+                alert('Please enter and save your name first.');
+                return;
+            }
+
+            if (Object.keys(userAnswers).length < 5) {
+                alert('Please answer all 5 questions before submitting.');
+                return;
+            }
+
+            let score = 0;
+
+            Object.keys(correctAnswers).forEach(qNum => {
+                const userAnswer = userAnswers[qNum];
+                const correctAnswer = correctAnswers[qNum];
+
+                const questions = document.querySelectorAll('.question');
+                const question = questions[parseInt(qNum) - 1];
+                const options = question.querySelectorAll('.option');
+
+                options.forEach(option => {
+                    const optionValue = option.getAttribute('data-value');
+
+                    if (optionValue === correctAnswer) {
+                        option.classList.add('correct');
+                    } else if (optionValue === userAnswer && userAnswer !== correctAnswer) {
+                        option.classList.add('incorrect');
+                    }
+
+                    option.classList.remove('selected');
+                });
+
+                if (userAnswer === correctAnswer) {
+                    score++;
+                }
+            });
+
+            const percentage = (score / 5) * 100;
+
+            document.getElementById('finalScore').textContent = `${score}/5`;
+            document.getElementById('correctAnswers').textContent = score;
+            document.getElementById('scorePercentage').textContent = `${percentage.toFixed(0)}%`;
+            document.getElementById('certificateName').textContent = userName;
+
+            const resultsPanel = document.getElementById('resultsPanel');
+            resultsPanel.style.display = 'block';
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Submitted';
+
+            resultsPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function reviewAnswers() {
+            if (!userName) {
+                alert('Please enter your name first.');
+                return;
+            }
+
+            const reviewContent = `
+                <h1>Test Review for ${userName}</h1>
+                <p><strong>Score: ${document.getElementById('finalScore').textContent}</strong></p>
+                <hr>
+            `;
+
+            const reviewWindow = window.open('', '_blank');
+            reviewWindow.document.write(`
+                <html>
+                <head>
+                    <title>Test Review - ${userName}</title>
+                    <style>
+                        body { font-family: Arial; padding: 30px; background: #f5f5f5; }
+                        h1 { color: #0A2463; }
+                        p { font-size: 16px; }
+                    </style>
+                </head>
+                <body>${reviewContent}</body>
+                </html>
+            `);
+            reviewWindow.document.close();
+        }
+
+        function generateCertificate() {
+            if (!userName) {
+                alert('Please enter your name first.');
+                return;
+            }
+
+            const score = document.getElementById('finalScore').textContent;
+            const percentage = document.getElementById('scorePercentage').textContent;
+            const date = new Date().toLocaleDateString();
+
+            const certWindow = window.open('', '_blank', 'width=900,height=700');
+            certWindow.document.write(`
+                <html>
+                <head>
+                    <title>Certificate - ${userName}</title>
+                    <style>
+                        body { 
+                            font-family: Arial; 
+                            text-align: center; 
+                            padding: 30px; 
+                            background: #f5f5f5;
+                            margin: 0;
+                        }
+                        .certificate { 
+                            border: 20px solid #0A2463; 
+                            padding: 60px; 
+                            background: white; 
+                            max-width: 900px; 
+                            margin: 20px auto;
+                            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                        }
+                        h1 { color: #0A2463; font-size: 36px; margin-bottom: 30px; }
+                        .name { 
+                            font-size: 32px; 
+                            color: #0A2463; 
+                            margin: 30px 0; 
+                            font-weight: bold;
+                        }
+                        .details { font-size: 18px; margin: 20px 0; }
+                        .button { margin-top: 40px; }
+                        button { 
+                            padding: 12px 30px; 
+                            font-size: 16px; 
+                            background: #0A2463; 
+                            color: white; 
+                            border: none; 
+                            border-radius: 5px; 
+                            cursor: pointer;
+                        }
+                        button:hover { background: #1E40AF; }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate">
+                        <h1>CERTIFICATE OF ACHIEVEMENT</h1>
+                        <p>This certifies that</p>
+                        <div class="name">${userName}</div>
+                        <p>has successfully completed the NPS Calculator Post-Test</p>
+                        <div class="details">
+                            <p><strong>Score: ${score} (${percentage})</strong></p>
+                            <p>Date: ${date}</p>
+                        </div>
+                        <p style="margin-top: 50px; font-style: italic;">
+                            <strong>Viraj S. Gupta</strong><br>
+                            Virtual Lab Coordinator<br>
+                            PCCOE
+                        </p>
+                    </div>
+                    
+                    <div class="button">
+                        <button onclick="window.print()">Print Certificate</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            certWindow.document.close();
+        }
+    </script>
+</body>
+</html>
